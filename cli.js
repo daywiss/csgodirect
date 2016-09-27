@@ -41,6 +41,7 @@ if(argv._.length > 1){
  console.log('Too many remote commands, just provide 1')
  return
 }
+
 if(command == 'signup'){
   api.auth(command,argv,null,argv.u,argv.v).then(function(result){
     console.log(result)

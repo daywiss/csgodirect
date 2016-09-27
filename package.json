@@ -1,6 +1,6 @@
 {
   "name": "csgodirect",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Command line interface and library module for csgodirect",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.4.6",
     "minimist": "^1.2.0",
     "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "tape": "^4.6.0"
   },
-  "bin":{
-    "csgodirect":"bin/index.js"
+  "bin": {
+    "csgodirect": "bin/index.js"
   }
 }
