@@ -73,7 +73,7 @@ if(argv.t == null){
 //   console.log('No .TOKEN file found use signup and login commands to create a new user and login')
 // }
 
-api.action(process.env,command,argv,argv.t).then(function(result){
+api.action(command,argv,argv.t,argv.u,arv.v).then(function(result){
   console.log(result)
 }).catch(function(e){
   console.log(e.toString())
