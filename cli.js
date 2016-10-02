@@ -43,7 +43,7 @@ if(argv._.length > 1){
 }
 
 if(command == 'signup'){
-  api.auth(command,argv,null,argv.u,argv.v).then(function(result){
+  api.signup(argv.u, argv).then(function(result){
     console.log(result)
   }).catch(function(e){
     console.log(e.toString())
@@ -52,8 +52,7 @@ if(command == 'signup'){
 }
 
 if(command == 'login'){
-  console.log(command)
-  api.auth(command,argv,null,argv.u,argv.v).then(function(result){
+  api.login(argv.u,argv).then(function(result){
     console.log(result)
   }).catch(function(e){
     console.log(e.toString())
@@ -73,7 +72,7 @@ if(argv.t == null){
 //   console.log('No .TOKEN file found use signup and login commands to create a new user and login')
 // }
 
-api.action(command,argv,argv.t,argv.u,arv.v).then(function(result){
+api.action(argv.u,argv.v,argv.t,command,argv).then(function(result){
   console.log(result)
 }).catch(function(e){
   console.log(e.toString())
