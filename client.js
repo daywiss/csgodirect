@@ -15,12 +15,14 @@ module.exports = function(options){
   methods.action = api.action.bind(null,host,version,token)
   methods.list = api.list.bind(null,host,version,token)
   methods.help = api.help.bind(null,host,version,token)
+  methods.user = null
 
   function init(params){
     var promise = null
 
     if(params.token == null) {
       promise = methods.login(params).then(function(result){
+        methods.user = result
         return result.token
       })
     }else{
