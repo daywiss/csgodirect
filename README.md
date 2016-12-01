@@ -1,6 +1,6 @@
 #CSGO Direct Client API
 Send commands through the command line, or include it in your node app to easily connect to CSGO Direct.
-Requires a registered user account which you can get at (www.csgodirect.com)[www.csgodirect.com].
+Requires a registered user account which you can get at [www.csgodirect.com](www.csgodirect.com).
 
 #Installing
 `npm install -g csgodirect` to install system wide.
