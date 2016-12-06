@@ -60,6 +60,15 @@ if(command == 'login'){
   return
 }
 
+if(command == 'logout'){
+  api.logout(argv.u,argv.t).then(function(result){
+    console.log(result)
+  }).catch(function(e){
+    console.log(e.toString())
+  }) 
+  return
+}
+
 if(argv.t == null){
   console.log('Must provide auth token with -t my-auth-token. Get one by using the signup and login commands')
   return

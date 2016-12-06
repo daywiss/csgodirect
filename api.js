@@ -21,6 +21,19 @@ function login(host,params){
   return request(options)
 }
 
+function logout(host,token){
+  host = host || defaultHost
+  var options = {
+    method:'POST',
+    uri:host + '/logout',
+    headers:{
+      Authorization: "Bearer " + token
+    },
+    json:true,
+  }
+  return request(options)
+}
+
 function signup(host,params){
   params = params || {}
   host = host || defaultHost
@@ -83,6 +96,7 @@ module.exports = {
   help:help,
   action:action,
   login:login,
+  logout:logout,
   signup:signup,
   defaultVersion:defaultVersion,
   defaultHost:defaultHost,
