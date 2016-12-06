@@ -27,10 +27,18 @@ If you have an API key already, you can skip login, otherwise login to retreive 
   csgodirect login --email youremail@example.com --password yourpassword 
 
 ```
-This returns to you a token object, store the string for future requests. 
+This returns to you a token string, store it for future requests. 
 
-`{ token: '8bc17f11-d594-4a06-89c2-03d42c75cd10' }`
+`8bc17f11-d594-4a06-89c2-03d42c75cd10`
 
+##Logout
+Logout invalidates your token.
+
+```
+  csgodirect logout -t 8bc17f11-d594-4a06-89c2-03d42c75cd10
+
+```
+Returns true
 
 ##Commands (Actions)
 CSGO Direct calls the api calls "actions", each action from the CLI follows the same pattern:
