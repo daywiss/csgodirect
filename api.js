@@ -1,6 +1,7 @@
 var request = require('request-promise')
 var assert = require('assert')
 var Promise = require('bluebird')
+var urljoin = require('url-join')
 
 var defaultVersion =  'v1'
 var defaultHost = 'http://localhost:3333'
@@ -100,6 +101,7 @@ module.exports = {
   signup:signup,
   defaultVersion:defaultVersion,
   defaultHost:defaultHost,
+  actionURL:actionURL
 }
 
 
