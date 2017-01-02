@@ -4,7 +4,7 @@ var Promise = require('bluebird')
 var urljoin = require('url-join')
 
 var defaultVersion =  'v1'
-var defaultHost = 'http://localhost:3333'
+var defaultHost = 'https://api.csgodirect.com'
 
 function actionURL(url,version,command){
   return [url,'actions',version,command].join('/')

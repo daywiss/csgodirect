@@ -1,6 +1,6 @@
 {
   "name": "csgodirect",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Command line interface and library module for csgodirect",
   "main": "index.js",
   "scripts": {

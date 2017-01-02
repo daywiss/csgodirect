@@ -5,20 +5,36 @@ var assert = require('assert')
 
 
 module.exports = function(url,token,version){
-  assert(url,'requires direct host base url')
+  var url = url || 'https://api.csgodirect.com'
   version = version || 'v1'
 
   var methods = {}
   methods.setToken = function(tokenid){
     token = tokenid
+    return token
   }
+
+  methods.login = function(params){
+    return api.login(url,params).then(function(result){
+      return methods.setToken(result)
+    })
+  }
+
+  methods.logout = function(){
+    return api.logout(url,token).then(function(result){
+      methods.setToken()
+      return result
+    })
+  }
+
+  methods.signup = api.signup
 
   methods.action = Promise.method(function(action,params,tokenid){
     return api.action(url,version,tokenid || token,action,params)
   })
 
   methods.help = Promise.method(function(command){
-    return api.action(url,version,command)
+    return api.help(url,version,command)
   })
   
   methods.buildActionURL= function(action){
