@@ -151,7 +151,7 @@ call all actions. All actions are defined in camel case and take in a parameter
 object.
 
 ```js
-  direct.action('actionName',{parameter1:'parameter1},'optionalToken').then(function(result){
+  direct.action('actionName',{parameter1:'parameter1'},'optionalToken').then(function(result){
     //returns action result
   }).catch(function(err){
     //or error if something went wrong
