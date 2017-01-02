@@ -145,6 +145,26 @@ Logout and invalidate your token. Also clears your token cache.
 ###Returns
 A promise which resolves on successful logout
 
+##Actions
+This is a majority of your interactions with CSGO Direct. Use this function to 
+call all actions. All actions are defined in camel case and take in a parameter
+object.
+
+```js
+  direct.action('actionName',{parameter1:'parameter1},'optionalToken').then(function(result){
+    //returns action result
+  }).catch(function(err){
+    //or error if something went wrong
+  })
+```
+###Parameters
+- actionName(required) - Name of action you are calling
+- params(sometimes optional) - Not all actions require parameters, but you specify them as a single object with parameters named as key value pairs
+- token(optional) - Optionally use a token on this call, will override the cached token, or use cachhed token if not defined 
+
+###Returns
+A promise with the result of the action. See documentation on action specifics.
+
 ##Help
 Return a list of actions, or get JSON documentation on a specific action
 
