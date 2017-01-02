@@ -27,7 +27,7 @@ if(argv.h){
       console.log(e.toString())
     })        
   }else{
-    api.help(command,argv.u,argv.v).then(function(result){
+    api.help(argv.u,argv.v,command).then(function(result){
       console.log(result)
     }).catch(function(e){
       console.log(e.toString())
