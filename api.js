@@ -59,6 +59,7 @@ function action(host,version,token,command,params){
     uri:url,
     body:params,  
     json:true,
+    timeout:60000, //1 minute timeout on all requests
     headers:{
       Authorization: "Bearer " + token
     }
