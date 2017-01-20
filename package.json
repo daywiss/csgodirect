@@ -1,18 +1,17 @@
 {
   "name": "csgodirect",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Command line interface and library module for csgodirect",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.4.6",
-    "memtable": "file:///home/developer/src/memtable",
     "minimist": "^1.2.0",
-    "request": "^2.34",
+    "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "tape": "^4.6.0",
     "url-join": "^1.1.0"
