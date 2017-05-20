@@ -1,50 +1,66 @@
-var request = require('request-promise')
+require('isomorphic-fetch');
 var assert = require('assert')
-var Promise = require('bluebird')
 var urljoin = require('url-join')
 
 var defaultVersion =  'v1'
 var defaultHost = 'https://api.csgodirect.com'
 
-function actionURL(url,version,command){
-  return [url,'actions',version,command].join('/')
+function actionURL(version,command){
+  return urljoin('actions',version,command)
+}
+
+function call(host,action,params,token,method){
+  var url = urljoin(host,action)
+  // console.log('calling',url,params,'with token:',token,method)
+  var options = {
+    method:method || 'POST',
+    headers:{
+      'Content-Type':'application/json',
+    },
+    timeout:60000,
+    credentials:'include',
+    mode:'cors'
+  }
+  if(token){
+    options.headers.Authorization = "Bearer " + token
+  }
+  if(params && options.method == 'POST'){
+    options.body = JSON.stringify(params) 
+  }
+  return fetch(url,options).then(function(res){
+    return Promise.all([res.ok,res.text()])
+  }).then(function(body){
+    var result = null
+    var ok = body[0]
+    var text = body[1]
+    try{
+      result = JSON.parse(text)
+    }catch(e){
+      result = text
+    }
+    if(ok){
+      return result
+    }else{
+      throw new Error(result)
+    }
+  })
 }
 
 function login(host,params){
   params = params || {}
   host = host || defaultHost
-  var options = {
-    method:'POST',
-    uri:host + '/login',
-    body:params,  
-    json:true,
-  }
-  return request(options)
+  return call(host,'login',params)
 }
 
 function logout(host,token){
   host = host || defaultHost
-  var options = {
-    method:'POST',
-    uri:host + '/logout',
-    headers:{
-      Authorization: "Bearer " + token
-    },
-    json:true,
-  }
-  return request(options)
+  return call(host,'logout',{},token)
 }
 
 function signup(host,params){
   params = params || {}
   host = host || defaultHost
-  var options = {
-    method:'POST',
-    uri:host + '/signup',
-    body:params,  
-    json:true,
-  }
-  return request(options)
+  return call(host,'signup',params)
 }
 
 function action(host,version,token,command,params){
@@ -53,43 +69,22 @@ function action(host,version,token,command,params){
   version = version || defaultVersion
   host = host || defaultHost
   params = params || {}
-  var url = actionURL(host,version,command)
-  var options = {
-    method:'POST',
-    uri:url,
-    body:params,  
-    json:true,
-    timeout:60000, //1 minute timeout on all requests
-    headers:{
-      Authorization: "Bearer " + token
-    }
-  }
-  return request(options)
+  var url = actionURL(version,command)
+  return call(host,url,params,token)
 }
 
 function help(host,version,command){
   version = version || defaultVersion
   host = host || defaultHost
-  var url = actionURL(host,version,command)
-  // console.log(url)
-
-  var options = {
-    method:'GET',
-    uri:url,
-    json:true
-  }
-  return request(options)
+  var url = actionURL(version,command)
+  return call(host,url,{},null,'GET')
 }
 
 function list(host,version){
   version = version || defaultVersion
   host = host || defaultHost
-  var options = {
-    method:'GET',
-    uri:[host,'actions',version].join('/'),
-    json:true
-  }
-  return request(options)
+  var url = actionURL(version)
+  return call(host,url,{},null,'GET')
 
 }
 

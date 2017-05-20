@@ -14,6 +14,17 @@ if(argv.h == null && argv._.length == 0){
 }
 
 var command = null
+var params = argv
+var remove = ['h','u','v','t','_']
+try{
+  //clone args
+  params = JSON.parse(JSON.stringify(argv))
+  //remove extra data from params
+  remove.forEach(function(prop){
+    delete params[prop]
+  })
+}catch(e){ console.log('error parsing params:', e) }
+
 
 if(argv.h){
   command = argv._[0] || argv.h 
@@ -38,12 +49,12 @@ if(argv.h){
 
 command = argv._[0]
 if(argv._.length > 1){
- console.log('Too many remote commands, just provide 1')
+ console.log('Too many remote commands, just provide 1. Parameters should be supplied with --paramName.')
  return
 }
 
 if(command == 'signup'){
-  api.signup(argv.u, argv).then(function(result){
+  api.signup(argv.u, params).then(function(result){
     console.log(result)
   }).catch(function(e){
     console.log(e.toString())
@@ -52,7 +63,7 @@ if(command == 'signup'){
 }
 
 if(command == 'login'){
-  api.login(argv.u,argv).then(function(result){
+  api.login(argv.u,params).then(function(result){
     console.log(result)
   }).catch(function(e){
     console.log(e.toString())
@@ -81,7 +92,7 @@ if(argv.t == null){
 //   console.log('No .TOKEN file found use signup and login commands to create a new user and login')
 // }
 
-api.action(argv.u,argv.v,argv.t,command,argv).then(function(result){
+api.action(argv.u,argv.v,argv.t,command,params).then(function(result){
   console.log(result)
 }).catch(function(e){
   console.log(e.toString())
