@@ -18,7 +18,6 @@ function call(host,action,params,token,method){
       'Content-Type':'application/json',
     },
     timeout:60000,
-    credentials:'include',
     mode:'cors'
   }
   if(token){
