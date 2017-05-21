@@ -29,7 +29,11 @@ module.exports = function(url,token,version){
   methods.signup = api.signup
 
   methods.action = function(action,params,tokenid){
-    return api.action(url,version,tokenid || token,action,params)
+    try{
+      return api.action(url,version,tokenid || token,action,params)
+    }catch(e){
+      return Promise.reject(e)
+    }
   }
 
   methods.help = function(command){

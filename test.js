@@ -73,6 +73,12 @@ test('client api test',function(t){
       t.end()
     }).catch(t.end)
   })
+  t.test('action error',function(t){
+    client.action().then(t.end).catch(function(err){
+      t.ok(err)
+      t.end()
+    })
+  })
   // t.test('init client by username and password',function(t){
   //   Client().init({email:user.email,password:user.password}).then(function(result){
   //     console.log(client)
